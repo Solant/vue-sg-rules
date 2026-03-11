@@ -1,0 +1,41 @@
+# based on https://ast-grep.github.io/catalog/tsx/#avoid-unnecessary-react-hook
+id: vue-unnecessary-composable
+message: Unnecessary Vue composable
+severity: warning
+note: https://solant.me/blog/3-not-a-composable/
+language: tsx
+utils:
+  composable:
+    any:
+      - has:
+          kind: call_expression
+          # omit non-composables starting with "use"
+          regex: ^use[A-Z0-9]
+          stopBy: end
+      - has:
+          kind: call_expression
+          regex: ref|shallowRef|triggerRef|customRef|reactive|shallowReactive|computed
+          stopBy: end
+      - has:
+          kind: call_expression
+          # provide/inject are not reactive, but they are tied to injection context (setup)
+          regex: inject|provide|hasInjectionContext
+          stopBy: end
+      - has:
+          kind: call_expression
+          regex: watch|watchEffect
+          stopBy: end
+rule:
+  any:
+    - pattern: function $FUNC($$$) { $$$ }
+    - pattern: let $FUNC = ($$$) => $$$
+    - pattern: const $FUNC = ($$$) => $$$
+    - pattern: var $FUNC = ($$$) => $$$
+  has:
+    pattern: $BODY
+    kind: statement_block
+    stopBy: end
+constraints:
+  # omit non-composables starting with "use"
+  FUNC: { regex: "^use[A-Z0-9]" }
+  BODY: { not: { matches: composable } }

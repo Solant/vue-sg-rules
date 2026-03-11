@@ -1,0 +1,10 @@
+id: lodash-tree-shaking
+message: Full lodash import
+severity: warning
+note: https://lodash.com/per-method-packages
+language: tsx
+rule:
+  kind: import_statement
+  has:
+    field: source
+    regex: "^.lodash.$"

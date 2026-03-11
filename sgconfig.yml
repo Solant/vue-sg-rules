@@ -1,0 +1,5 @@
+languageGlobs:
+  tsx: ["*.js", "*.jsx", "*.cjs", "*.ts", "*.tsx"]
+  html: [".vue"]
+ruleDirs:
+  - "rules"
