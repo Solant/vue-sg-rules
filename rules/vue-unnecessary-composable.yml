@@ -1,8 +1,9 @@
 # based on https://ast-grep.github.io/catalog/tsx/#avoid-unnecessary-react-hook
 id: vue-unnecessary-composable
-message: Unnecessary Vue composable
+message: "$FUNC has a `use` prefix but contains no composable APIs"
 severity: warning
-note: https://solant.me/blog/3-not-a-composable/
+note: "The `use` prefix implies Composition API usage. Rename this function or add reactive/watchable APIs"
+url: https://solant.me/blog/3-not-a-composable/
 language: tsx
 utils:
   composable:

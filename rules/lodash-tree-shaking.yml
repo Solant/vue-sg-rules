@@ -1,7 +1,8 @@
 id: lodash-tree-shaking
-message: Full lodash import
+message: Importing the full lodash bundle prevents tree-shaking
 severity: warning
-note: https://lodash.com/per-method-packages
+note: Use direct imports (e.g. `lodash/cloneDeep`) or `lodash-es` named imports instead
+url: https://lodash.com/per-method-packages
 language: tsx
 rule:
   kind: import_statement
