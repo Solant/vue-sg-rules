@@ -1,0 +1,13 @@
+id: pinia-immortal-query
+message: useQuery inside a store is never automatically disposed
+severity: warning
+note: Queries in stores are never disposed. Consume query cache directly inside the store or pass data to the store
+url: https://pinia-colada.esm.dev/guide/queries.html#Pausing-queries
+language: tsx
+rule:
+  kind: call_expression
+  regex: useQuery
+  inside:
+    kind: call_expression
+    regex: ^defineStore
+    stopBy: end
